@@ -8,6 +8,7 @@ BASE_DIR = Path(__file__).parent
 
 class Setting:
     BOT_TOKEN: SecretStr
+    ADMINS: list[int | str]
 
     db_url: str = f"sqlite+aiosqlite:///{BASE_DIR}/database/db.db"
 
