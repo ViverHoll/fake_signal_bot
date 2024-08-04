@@ -1,0 +1,8 @@
+﻿aiogram
+sqlalchemy
+pydantic_settings
+aiofiles
+pillow
+alembic
+aiogram_dialog
+asyncpg
