@@ -1,9 +1,9 @@
 from app.app_config import (
     AppConfig,
+    ChannelConfig,
     CommonConfig,
     PostgresConfig,
     WinConfig,
-    ChannelConfig
 )
 
 
@@ -12,5 +12,5 @@ def create_app_config() -> AppConfig:
         common=CommonConfig(),
         postgres=PostgresConfig(),
         win=WinConfig(),
-        channel=ChannelConfig()
+        channel=ChannelConfig(),
     )

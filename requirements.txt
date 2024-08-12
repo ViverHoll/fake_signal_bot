@@ -6,3 +6,5 @@ pillow
 alembic
 aiogram_dialog
 asyncpg
+ruff
+pydantic

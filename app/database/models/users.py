@@ -7,9 +7,6 @@ from .base import BaseModel
 class UserModel(BaseModel):
     __tablename__ = "users"
 
-    user_id: Mapped[int] = mapped_column(
-        BigInteger,
-        primary_key=True
-    )
+    user_id: Mapped[int] = mapped_column(BigInteger, primary_key=True)
 
     username: Mapped[str]

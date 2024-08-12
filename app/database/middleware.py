@@ -4,8 +4,8 @@ from typing import Any
 from aiogram import BaseMiddleware, Dispatcher
 from aiogram.types import TelegramObject
 
-from .session import SessionPool
 from .dao import HolderDAO
+from .session import SessionPool
 
 
 class DatabaseMiddleware(BaseMiddleware):
@@ -16,12 +16,10 @@ class DatabaseMiddleware(BaseMiddleware):
             self,
             handler: Callable[[TelegramObject, dict[str, Any]], Awaitable[Any]],
             event: TelegramObject,
-            data: dict[str, Any]
+            data: dict[str, Any],
     ) -> Any:
         session_pool: SessionPool = data["session_pool"]
 
         async with session_pool() as session:
             data["db"] = HolderDAO(session=session)
             return await handler(event, data)
-
-

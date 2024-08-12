@@ -1,8 +1,8 @@
-import os
 import asyncio
-from random import triangular, randint, random
+import os
+from random import randint, random, triangular
 
-from aiogram import Router, F
+from aiogram import F, Router
 from aiogram.types import CallbackQuery, FSInputFile
 
 from app.func import add_text_on_photo
@@ -59,12 +59,10 @@ async def get_signal(callback: CallbackQuery):
     add_text_on_photo(
         text=f"{random_value}",
         photo_path=os.path.abspath("image/lucky_jet.jpg"),
-        new_path_photo=abs_path_result_photo
+        new_path_photo=abs_path_result_photo,
     )
 
-    photo = FSInputFile(
-        path=abs_path_result_photo
-    )
+    photo = FSInputFile(path=abs_path_result_photo)
 
     await info_message.edit_text("Получаю сигнал")
     await asyncio.sleep(0.5)
@@ -73,7 +71,6 @@ async def get_signal(callback: CallbackQuery):
     await info_message.delete()
     await callback.message.answer_photo(
         photo=photo,
-        caption=f"🚀 Игра №{number_game}\n\n"
-                f"Шанс - {win_percent}%",
-        reply_markup=keyboard
+        caption=f"🚀 Игра №{number_game}\n\nШанс - {win_percent}%",
+        reply_markup=keyboard,
     )

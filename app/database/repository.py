@@ -1,6 +1,6 @@
-from typing import Generic, TypeVar, Any
+from typing import Any, Generic, TypeVar
 
-from sqlalchemy import select, update, insert, text
+from sqlalchemy import insert, select, text, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from .models import BaseModel
@@ -19,16 +19,9 @@ class Repository(Generic[ModelType]):
     session: AsyncSession
     model: type[ModelType]
 
-    __slots__ = (
-        "session",
-        "model"
-    )
+    __slots__ = ("session", "model")
 
-    def __init__(
-            self,
-            session: AsyncSession,
-            model: type[ModelType]
-    ) -> None:
+    def __init__(self, session: AsyncSession, model: type[ModelType]) -> None:
         self.session = session
         self.model = model
 

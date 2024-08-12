@@ -1,4 +1,4 @@
-from typing import Awaitable, Any, Callable
+from typing import Any, Awaitable, Callable
 
 from aiogram import BaseMiddleware
 from aiogram.types import TelegramObject, User
@@ -11,7 +11,7 @@ class CheckDataUserMiddleware(BaseMiddleware):
             self,
             handler: Callable[[TelegramObject, dict[str, Any]], Awaitable[Any]],
             event: TelegramObject,
-            data: dict[str, Any]
+            data: dict[str, Any],
     ) -> Any:
         db: Database = data["db"]
 
@@ -19,10 +19,7 @@ class CheckDataUserMiddleware(BaseMiddleware):
         if not user:
             return await handler(event, data)
 
-        parameters = {
-            "user_id": user.id,
-            "username": user.username
-        }
+        parameters = {"user_id": user.id, "username": user.username}
 
         if not user:
             await db.users.add_user(**parameters)
@@ -32,4 +29,3 @@ class CheckDataUserMiddleware(BaseMiddleware):
             await db.users.update_username(**parameters)
 
         return await handler(event, data)
-

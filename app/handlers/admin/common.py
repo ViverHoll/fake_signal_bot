@@ -1,9 +1,8 @@
 from pathlib import Path
 
-from aiogram import Router, F
-from aiogram.types import Message, FSInputFile
-
 from aiofiles import open as async_open
+from aiogram import F, Router
+from aiogram.types import FSInputFile, Message
 
 from app.database import Database
 
@@ -31,6 +30,5 @@ async def get_users(message: Message, db: Database):
     file = FSInputFile(path=f"{abs_path}/users.txt")
 
     await message.answer_document(
-        document=file,
-        caption="Вот файл со всеми пользователями!"
+        document=file, caption="Вот файл со всеми пользователями!"
     )

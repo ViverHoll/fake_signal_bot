@@ -5,10 +5,7 @@ from app.app_config import AppConfig
 from app.database import Database
 
 
-async def get_texts(
-        dialog_manager: DialogManager,
-        **kwargs: Any
-):
+async def get_texts(dialog_manager: DialogManager, **kwargs: Any):
     db: Database = dialog_manager.middleware_data["db"]
     config: AppConfig = dialog_manager.middleware_data["config"]
 
@@ -17,6 +14,5 @@ async def get_texts(
     return {
         "main_text": texts.main_menu,
         "manual_text": texts.manual,
-        "win_ref_url": config.win.ref_url
+        "win_ref_url": config.win.ref_url,
     }
-

@@ -1,102 +1,30 @@
-from aiogram.utils.keyboard import (InlineKeyboardBuilder,
-                                    InlineKeyboardMarkup)
-
-
-# def get_main_menu() -> InlineKeyboardMarkup:
-#     """Функция для получения основного меню"""
-#
-#     buttons = {
-#         "Регистрация": "registration",
-#         "Инструкция": "manual",
-#         "Выдать сигнал": "signal_registration"
-#     }
-#
-#     keyboard = InlineKeyboardBuilder()
-#
-#     for name, callback in buttons.items():
-#         keyboard.button(
-#             text=name,
-#             callback_data=callback
-#         )
-#
-#     keyboard.adjust(1)
-#     return keyboard.as_markup()
-#
-#
-# def get_registration_keyboard(win_url: str) -> InlineKeyboardMarkup:
-#     """Функция для генерации клавиатуры со ссылкой на 1win"""
-#     keyboard = InlineKeyboardBuilder()
-#     keyboard.button(
-#         text="Регистрация",
-#         url=win_url
-#     )
-#     keyboard.button(
-#         text="Назад",
-#         callback_data="back_registration"
-#     )
-#     keyboard.adjust(1)
-#     return keyboard.as_markup()
-#
-#
-# def get_button_url_and_back_button() -> InlineKeyboardMarkup:
-#     """Функция для генерации клавиатуры со ссылкой и кнопкой в главное меню"""
-#     keyboard = InlineKeyboardBuilder()
-#     keyboard.button(
-#         text="Регистрация",
-#         url=win_ref_url
-#     )
-#     keyboard.button(
-#         text="Назад",
-#         callback_data="back_main_menu"
-#     )
-#     keyboard.adjust(1)
-#     return keyboard.as_markup()
+from aiogram.utils.keyboard import InlineKeyboardBuilder, InlineKeyboardMarkup
 
 
 def get_after_registration_menu() -> InlineKeyboardMarkup:
     """Функция для получения клавиатуры после регистрации"""
-    buttons = {
-        "Инструкция": "manual_signal",
-        "Получить сигналы": "get_signal"
-    }
+    buttons = {"Инструкция": "manual_signal", "Получить сигналы": "get_signal"}
 
     keyboard = InlineKeyboardBuilder()
 
     for name, callback in buttons.items():
-        keyboard.button(
-            text=name,
-            callback_data=callback
-        )
+        keyboard.button(text=name, callback_data=callback)
 
     return keyboard.as_markup()
 
 
-def get_not_sub_menu(
-        url: str
-) -> InlineKeyboardMarkup:
-    """Функция для получения меню, если нет подписки """
+def get_not_sub_menu(url: str) -> InlineKeyboardMarkup:
+    """Функция для получения меню, если нет подписки"""
     keyboard = InlineKeyboardBuilder()
-    keyboard.button(
-        text="Подписаться на канал",
-        url=url
-    )
+    keyboard.button(text="Подписаться на канал", url=url)
 
-    keyboard.button(
-        text="Проверить подписку",
-        callback_data="check_sub"
-    )
+    keyboard.button(text="Проверить подписку", callback_data="check_sub")
     return keyboard.as_markup()
 
 
-def get_button_with_data(
-        name_button: str,
-        callback: str
-) -> InlineKeyboardMarkup:
+def get_button_with_data(name_button: str, callback: str) -> InlineKeyboardMarkup:
     keyboard = InlineKeyboardBuilder()
-    keyboard.button(
-        text=name_button,
-        callback_data=callback
-    )
+    keyboard.button(text=name_button, callback_data=callback)
 
     keyboard.adjust(1)
     return keyboard.as_markup()

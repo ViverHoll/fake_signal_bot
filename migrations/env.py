@@ -1,14 +1,12 @@
 import asyncio
 from logging.config import fileConfig
 
-from sqlalchemy import pool, URL
+from alembic import context
+from sqlalchemy import URL
 from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import create_async_engine
 
-from alembic import context
-
 from app.app_config import PostgresConfig
-
 from app.database.models import BaseModel
 
 # this is the Alembic Config object, which provides
@@ -31,6 +29,7 @@ target_metadata = BaseModel.metadata
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
+
 
 def _get_postgres_url() -> URL:
     _config = PostgresConfig()
@@ -74,9 +73,7 @@ async def run_async_migrations() -> None:
 
     """
 
-    connectable = create_async_engine(
-        url=_get_postgres_url()
-    )
+    connectable = create_async_engine(url=_get_postgres_url())
 
     async with connectable.connect() as connection:
         await connection.run_sync(do_run_migrations)

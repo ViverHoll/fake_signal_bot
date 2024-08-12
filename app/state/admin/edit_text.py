@@ -1,14 +1,11 @@
-from aiogram import Router, F
-from aiogram.types import Message, CallbackQuery
+from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
-
-from app.database import Database
-
-from app.keyboards.admin import get_texts_menu
-
-from app.state.states import EditText
+from aiogram.types import CallbackQuery, Message
 
 from app.callback_factory import EditTextFactory
+from app.database import Database
+from app.keyboards.admin import get_texts_menu
+from app.state.states import EditText
 
 router = Router()
 
@@ -16,40 +13,26 @@ router = Router()
 @router.message(F.text == "Редактировать текст")
 async def start_fsm_edit_text(message: Message, state: FSMContext):
     await message.answer(
-        "Выберите текст который нужно изменить:",
-        reply_markup=get_texts_menu()
+        "Выберите текст который нужно изменить:", reply_markup=get_texts_menu()
     )
     await state.set_state(EditText.menu_text)
 
 
-@router.callback_query(
-    EditText.menu_text,
-    EditTextFactory.filter()
-)
+@router.callback_query(EditText.menu_text, EditTextFactory.filter())
 async def get_menu_text(
-        callback: CallbackQuery,
-        state: FSMContext,
-        callback_data: EditTextFactory
+        callback: CallbackQuery, state: FSMContext, callback_data: EditTextFactory
 ):
-    await callback.message.edit_text(
-        "Отлично! Теперь введите новый текст"
-    )
+    await callback.message.edit_text("Отлично! Теперь введите новый текст")
 
     await state.update_data(menu=callback_data.menu)
     await state.set_state(EditText.new_text)
 
 
 @router.message(EditText.new_text, F.text)
-async def get_new_text(
-        message: Message,
-        state: FSMContext,
-        db: Database
-):
+async def get_new_text(message: Message, state: FSMContext, db: Database):
     menu_text = (await state.get_data()).get("menu")
 
-    parameters = {
-        menu_text: message.html_text
-    }
+    parameters = {menu_text: message.html_text}
 
     await db.texts.update_text(**parameters)
     await message.answer("Текст успешно изменен")

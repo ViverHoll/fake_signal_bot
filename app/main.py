@@ -1,10 +1,6 @@
 import asyncio
 
-from app.factory import (
-    create_bot,
-    create_dispatcher,
-    create_app_config
-)
+from app.factory import create_app_config, create_bot, create_dispatcher
 
 
 async def main():

@@ -4,7 +4,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.database.models import TextModel
 from app.database.repository import Repository
-
 from app.types_data import Text
 
 
@@ -14,10 +13,7 @@ class TextDAO:
     __slots__ = ("repository",)
 
     def __init__(self, session: AsyncSession) -> None:
-        self.repository = Repository(
-            session=session,
-            model=TextModel
-        )
+        self.repository = Repository(session=session, model=TextModel)
 
     async def get_texts(self) -> Text:
         texts = (await self.repository.get_by_where()).all()

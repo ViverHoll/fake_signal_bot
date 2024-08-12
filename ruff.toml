@@ -1,0 +1,30 @@
+target-version = "py38"
+line-length = 99
+exclude = [
+    ".git",
+    ".venv",
+    ".idea",
+    ".tests",
+    ".cache",
+    "build",
+    "dist",
+    "scripts",
+]
+
+lint.select = [
+    "C",
+    "DTZ",
+    "E",
+    "F",
+    "I",
+    "ISC",
+    "N",
+    "PLC",
+    "PLE",
+    "Q",
+    "W",
+    "YTT",
+    "RET",
+    "SIM",
+    "ASYNC",
+]

@@ -1,9 +1,8 @@
 from pathlib import Path
 
-from pydantic import SecretStr, BaseModel
-
-from pydantic_settings import SettingsConfigDict
+from pydantic import BaseModel, SecretStr
 from pydantic_settings import BaseSettings as BaseSettings_
+from pydantic_settings import SettingsConfigDict
 from sqlalchemy import URL
 
 
@@ -11,7 +10,7 @@ class BaseSettings(BaseSettings_):
     model_config = SettingsConfigDict(
         env_file=Path(__file__).parent / "config.env",
         env_file_encoding="utf-8",
-        extra="ignore"
+        extra="ignore",
     )
 
 
@@ -31,7 +30,7 @@ class PostgresConfig(BaseSettings, env_prefix="POSTGRES_"):
             username=self.user,
             password=self.password.get_secret_value(),
             host=self.host,
-            database=self.db_name
+            database=self.db_name,
         )
 
 

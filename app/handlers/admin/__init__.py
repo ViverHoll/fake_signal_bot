@@ -8,7 +8,4 @@ from .common import common_router
 admin_router = Router()
 admin_router.message.filter(IsAdmin())
 
-admin_router.include_routers(
-    common_router,
-    commands_router
-)
+admin_router.include_routers(common_router, commands_router)

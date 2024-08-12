@@ -1,7 +1,7 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from .users import UserDAO
 from .texts import TextDAO
+from .users import UserDAO
 
 
 class HolderDAO:
